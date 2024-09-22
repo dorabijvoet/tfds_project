@@ -1,0 +1,11 @@
+# Ignore the data folder
+data/
+
+# Ignore .env files
+.env
+
+# Ignore git-related files
+.gitignore
+
+# Ignore README
+README.md

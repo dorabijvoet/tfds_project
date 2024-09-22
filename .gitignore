@@ -3,3 +3,6 @@
 
 # Personal workspace
 personal_workspace/
+
+# Caches
+.flashrank_cache/
