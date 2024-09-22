@@ -43,7 +43,7 @@ agent = make_graph_agent(
 )
 
 ## FRONT ##
-st.title("Ask Your Question")
+st.title("Ask me anything about climate change !")
 
 # Step 1: Create a text input field to capture user questions
 user_input = st.text_input("Enter your question:")
@@ -53,6 +53,8 @@ inputs = {"user_input": user_input, "sources_input": "auto", "audience": "genera
 if st.button("Submit"):
     # Step 3: Simulate agent invocation (replace with actual call to agent)
     response = agent.invoke(inputs)
+
+    st.write("Here are some interactive graphs related to your question:")
 
     # Extract the returned_content from recommended_content in the response
     recommended_content = response.get("recommended_content", [])
