@@ -1,2 +1,5 @@
+# Environment variables
+.env
+
 # Personal workspace
 personal_workspace/
