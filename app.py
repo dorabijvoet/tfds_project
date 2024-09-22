@@ -43,7 +43,7 @@ agent = make_graph_agent(
 )
 
 ## FRONT ##
-st.title("Ask me anything about climate change !")
+st.title("Ask me anything about climate change in any language!")
 
 # Step 1: Create a text input field to capture user questions
 user_input = st.text_input("Enter your question:")
@@ -54,22 +54,41 @@ if st.button("Submit"):
     # Step 3: Simulate agent invocation (replace with actual call to agent)
     response = agent.invoke(inputs)
 
-    st.write("Here are some interactive graphs related to your question:")
+    st.markdown(
+        '<p style="color:darkblue; font-weight:bold;">Here are some interactive graphs related to your question:</p>',
+        unsafe_allow_html=True,
+    )
 
     # Extract the returned_content from recommended_content in the response
     recommended_content = response.get("recommended_content", [])
 
     # Step 4: Display the embedded returned_content (if any)
     if recommended_content:
+        # Create a dictionary to group iframes by category
+        categorized_content = {}
         for doc in recommended_content:
-            returned_content = doc.metadata.get("embedding", "")
+            category = doc.metadata.get("category", "Other")
+            iframe_content = doc.metadata.get("embedding", "")
 
-            # Display each iframe content in the app (assuming returned_content is HTML)
-            if returned_content:
-                st.components.v1.html(returned_content, height=600, scrolling=True)
+            # Add iframe content to the respective category
+            if category in categorized_content:
+                categorized_content[category].append(iframe_content)
+            else:
+                categorized_content[category] = [iframe_content]
+
+        # Step 6: Create tabs for each category
+        if categorized_content:
+            tabs = st.tabs(
+                list(categorized_content.keys())
+            )  # Create a tab for each category
+
+            # Loop through each category and corresponding tab
+            for i, (category, iframes) in enumerate(categorized_content.items()):
+                with tabs[i]:  # Display content in the respective tab
+                    for iframe in iframes:
+                        st.components.v1.html(iframe, height=600, scrolling=True)
     else:
         st.write("No recommended content found.")
-
 
 ## TEST ##
 # result = agent.invoke(
