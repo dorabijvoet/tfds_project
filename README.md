@@ -23,27 +23,3 @@ The app uses **OpenAI embeddings**, **a custom retriever**, and a **reranking sy
 2. **Agent Processing**: The app invokes a specialized agent that processes the user's question, identifies the key topics, and retrieves relevant content. During the process it does query translation, transformation and expansion to improve the results.
 3. **Reranking and Retrieval**: The content is ranked and filtered based on relevance, and graphs that best match the user's question are selected.
 4. **Display**: The app embeds and displays these graphs, offering interactive exploration.
-
-## Project Structure
-
-```bash
-tfds_project/
-├── tfds_project/
-│   ├── engine/
-│   │   ├── chains/
-│   │   │   ├── __init__.py
-│   │   │   ├── embeddings.py         # Embedding functions for the app
-│   │   │   ├── graph_retriever.py    # Module to retrieve graphs based on the query
-│   │   │   ├── graph.py              # Logic for interacting with graph data
-│   │   │   ├── reranker.py           # Reranking function for the results
-│   │   ├── llm/
-│   │   │   ├── __init__.py           # Initializes the LLM (large language model) logic
-│   │   ├── utils.py                  # Utility functions
-├── .dockerignore                     # Files excluded from the Docker image
-├── .env                              # Environment variables (DO NOT SHARE PUBLICLY)
-├── .gitignore                        # Files excluded from Git tracking
-├── app.py                            # Main entry point for running the app
-├── Dockerfile                        # Docker configuration for containerizing the app
-├── poetry.lock                       # Poetry lock file for dependency management
-├── pyproject.toml                    # Poetry configuration file for dependencies
-├── README.md                         # Project README file (this file)
