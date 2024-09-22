@@ -123,8 +123,12 @@ def make_graph_retriever_node(
                     f"There are no graphs which match the sources filtered on. Sources filtered on: {sources}. Sources available: {POSSIBLE_SOURCES}."
                 )
 
+            print(f"\n\n {docs} \n\n")
+
             # Remove duplicates and keep the duplicate document with the highest reranking score
             docs = remove_duplicates_keep_highest_score(docs)
+
+            print(f"\n\n {docs} \n\n")
 
             # Sorting the list in descending order by rerank_score
             # Then select the top k
@@ -132,6 +136,8 @@ def make_graph_retriever_node(
                 docs, key=lambda x: x.metadata["reranking_score"], reverse=True
             )
             docs = docs[:k_final]
+
+            print(f"\n\n {docs} \n\n")
 
         return {"recommended_content": docs}
 
